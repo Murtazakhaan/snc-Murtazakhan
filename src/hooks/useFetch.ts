@@ -6,7 +6,7 @@ interface FetchState<T> {
   error: string | null;
 }
 
-const useFetch = <T>(url: string, createAbortController: () => AbortController, refetch: any): FetchState<T> => {
+export const useFetch = <T>(url: string, createAbortController: () => AbortController, refetch: any): FetchState<T> => {
   const [data, setData] = useState<T | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -46,5 +46,3 @@ const useFetch = <T>(url: string, createAbortController: () => AbortController, 
 
   return { data, loading, error };
 };
-
-export default useFetch;

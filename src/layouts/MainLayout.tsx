@@ -1,12 +1,18 @@
-import { FunctionComponent, PropsWithChildren, useCallback, useEffect, useRef, useState } from "react";
+import {
+  FunctionComponent,
+  PropsWithChildren,
+  useCallback,
+  useState,
+} from "react";
 import { Inter } from "next/font/google";
 import classNames from "classnames";
 import { Button } from "@/components/Button";
 import { Person, User } from "@/utils/common/person";
-import useFetch from "@/hooks/use-fetch";
 import { UserCard } from "@/components/UserCard";
-import { useLogs } from "@/context/LogsContext";
+import { useGlobalContext } from "@/context/GlobalContext";
 import { Clock } from "@/components/Clock";
+import { useLogs } from "@/hooks/useLogs";
+import { useFetch } from "@/hooks/useFetch";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -19,21 +25,24 @@ export const MainLayout: FunctionComponent<
 
   const handleUserChange = (person: string) => {
     setAcitvePerson(person);
-  }
+  };
 
   const createNewController = useCallback(() => {
     return new AbortController();
   }, []);
-  
-  const { data: personData, loading, error } = useFetch<User>(
-    `/api/person?person=${activePerson}`, 
+
+  const {
+    data: personData,
+    loading,
+    error,
+  } = useFetch<User>(
+    `/api/person?person=${activePerson}`,
     createNewController,
     activePerson
   );
 
-  const {enableLogs} = useLogs()
-
-  console.log("useLogs",enableLogs);
+  const { enableLogs, handleToggleLogs } = useGlobalContext();
+  useLogs(personData);
 
   return (
     <main
@@ -43,19 +52,31 @@ export const MainLayout: FunctionComponent<
         "flex flex-col justify-center items-center"
       )}
     >
-      <div className={classNames("flex gap-2 mb-4")}>
-        {Object.values(Person).map((person) => (
-          <Button
-          key={person}
-          active={activePerson === person}
-          onClick={() => handleUserChange(person) }
-          >
-            {person}
+      <div className="flex mb-4">
+        <div className="flex gap-2">
+          {Object.values(Person).map((person) => (
+            <Button
+              key={person}
+              active={activePerson === person}
+              onClick={() => handleUserChange(person)}
+            >
+              {person}
+            </Button>
+          ))}
+          <button />
+        </div>
+        <div className="border-l border-black dark:border-white mx-2 pl-2"></div>
+        <div>
+          <Button active={enableLogs} onClick={handleToggleLogs}>
+            {enableLogs ? "Disable Logs" : "Enable Logs"}
           </Button>
-        ))}
-        <button />
+        </div>
       </div>
-      <UserCard user={personData} isLoading={loading} error={error && activePerson} />
+      <UserCard
+        user={personData}
+        isLoading={loading}
+        error={error && activePerson}
+      />
       <Clock />
     </main>
   );

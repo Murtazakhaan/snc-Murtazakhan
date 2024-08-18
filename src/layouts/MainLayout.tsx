@@ -48,7 +48,7 @@ export const MainLayout: FunctionComponent<
     <main
       className={classNames(
         inter.className,
-        "h-screen w-screen",
+        "h-screen w-screen px-3",
         "flex flex-col justify-center items-center"
       )}
     >
@@ -65,7 +65,7 @@ export const MainLayout: FunctionComponent<
           ))}
           <button />
         </div>
-        <div className="border-l border-black dark:border-white mx-2 pl-2"></div>
+        <div className="sm:border-l border-l-0 border-black dark:border-white sm:mx-2 sm:pl-2"></div>
         <div>
           <Button active={enableLogs} onClick={handleToggleLogs}>
             {enableLogs ? "Disable Logs" : "Enable Logs"}
@@ -74,7 +74,7 @@ export const MainLayout: FunctionComponent<
       </div>
       <UserCard
         user={personData}
-        isLoading={loading}
+        isLoading={loading && (activePerson ? true : false)}
         error={error && activePerson}
       />
       <Clock />

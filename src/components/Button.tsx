@@ -16,8 +16,11 @@ export const Button: FunctionComponent<PropsWithChildren<ButtonProps>> = ({
       type="button"
       onClick={onClick}
       className={classNames(
-        "px-2 py-1 border border-black dark:border-white transition-all",
-        active ? "text-white dark:text-black dark:bg-white bg-black" : "border-black"
+        "px-4 py-2 border rounded-md dark:bg-white",
+        "sm:px-6 sm:py-3",
+        "text-xs sm:text-base",
+        active ? "bg-[#20b2aa] dark:bg-[#20b2aa] text-white " : "bg-white text-gray-700",
+        "hover:bg-blue-100 hover:text-black"
       )}
     >
       {children}

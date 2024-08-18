@@ -74,7 +74,7 @@ export const MainLayout: FunctionComponent<
       </div>
       <UserCard
         user={personData}
-        isLoading={loading}
+        isLoading={loading && (activePerson ? true : false)}
         error={error && activePerson}
       />
       <Clock />

@@ -14,11 +14,33 @@ datasource db {
 }
 
 model User {
-  id                 Int    @id @default(autoincrement())
+ id                 Int    @id @default(autoincrement())
   backgroundImageUrl String
   profilePictureUrl  String
   name               String @db.VarChar(100)
   title              String @db.VarChar(100)
   followers          Int
   following          Int
+  companies UserCompany[] 
+
+  @@map("users")
 }
+
+model Company {
+  id        Int        @id @default(autoincrement())
+  name      String
+  users     UserCompany[]
+
+  @@map("companies")
+}
+
+model UserCompany {
+  userId    Int
+  companyId Int
+  user      User     @relation(fields: [userId], references: [id])
+  company   Company  @relation(fields: [companyId], references: [id])
+
+  @@id([userId, companyId])
+  @@map("user_companies")
+}
+

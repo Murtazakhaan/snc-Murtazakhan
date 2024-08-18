@@ -58,5 +58,7 @@ For the backend tasks, you'll need these additional steps:
 
 1. Copy `.env.example` into `.env`. _Note: while NextJS supports both `.env` and `.env.local`, Prisma requires a `.env`_.
 2. Install Docker with Docker Compose in your machine. The easiest way is to install [Docker Desktop](https://www.docker.com/products/docker-desktop/).
-3. Run the services in Docker Compose: `docker compose up`.
-4. Apply the existing migrations to your DB: `prisma migrate dev` ([docs](https://www.prisma.io/docs/orm/reference/prisma-cli-reference#migrate-dev))
+3. Run the services in Docker Compose: `docker compose up -d`.
+4. Run cmd `npx prisma migrate dev --name init`
+5. Run cmd `npx prisma db seed`
+6. Run cmd `npm run dev`

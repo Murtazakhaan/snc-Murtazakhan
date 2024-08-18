@@ -3,7 +3,6 @@ import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
 
 async function main() {
-  // TODO: Add mock users
   await prisma.user.create({
     data: {
       backgroundImageUrl:
@@ -17,7 +16,7 @@ async function main() {
     },
   });
   await prisma.user.create({
-    data:  {
+    data: {
       backgroundImageUrl:
         "https://images.unsplash.com/photo-1480714378408-67cf0d13bc1b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxleHBsb3JlLWZlZWR8Mnx8fGVufDB8fHx8&w=1000&q=80",
       profilePictureUrl:

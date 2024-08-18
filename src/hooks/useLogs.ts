@@ -1,7 +1,7 @@
-import { useEffect } from 'react';
-import { useCurrentTime } from './useCurrentTime';
-import { useGlobalContext } from '@/context/GlobalContext';
-import { User } from '@/utils/common/person';
+import { useEffect } from "react";
+import { useCurrentTime } from "./useCurrentTime";
+import { useGlobalContext } from "@/context/GlobalContext";
+import { User } from "@/utils/common/person";
 
 export const useLogs = (user: User | null) => {
   const currentTime = useCurrentTime();

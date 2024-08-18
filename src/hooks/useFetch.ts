@@ -6,7 +6,11 @@ interface FetchState<T> {
   error: string | null;
 }
 
-export const useFetch = <T>(url: string, createAbortController: () => AbortController, refetch: any): FetchState<T> => {
+export const useFetch = <T>(
+  url: string,
+  createAbortController: () => AbortController,
+  refetch: any
+): FetchState<T> => {
   const [data, setData] = useState<T | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -22,13 +26,13 @@ export const useFetch = <T>(url: string, createAbortController: () => AbortContr
       try {
         const response = await fetch(url, { signal });
         if (!response.ok) {
-          throw new Error('Network response was not ok');
+          throw new Error("Network response was not ok");
         }
         const data = await response.json();
         setData(data);
       } catch (err: any) {
-        if (err.name === 'AbortError') {
-          console.log('Fetch aborted');
+        if (err.name === "AbortError") {
+          console.log("Fetch aborted");
         } else {
           setError(err.message);
         }

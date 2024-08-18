@@ -19,7 +19,9 @@ export const Button: FunctionComponent<PropsWithChildren<ButtonProps>> = ({
         "px-4 py-2 border rounded-md dark:bg-white",
         "sm:px-6 sm:py-3",
         "text-xs sm:text-base",
-        active ? "bg-[#20b2aa] dark:bg-[#20b2aa] text-white " : "bg-white text-gray-700",
+        active
+          ? "bg-[#20b2aa] dark:bg-[#20b2aa] text-white "
+          : "bg-white text-gray-700",
         "hover:bg-blue-100 hover:text-black"
       )}
     >

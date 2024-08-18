@@ -5,6 +5,8 @@ import { Button } from "@/components/Button";
 import { Person, User } from "@/utils/common/person";
 import useFetch from "@/hooks/use-fetch";
 import { UserCard } from "@/components/UserCard";
+import { useLogs } from "@/context/LogsContext";
+import { Clock } from "@/components/Clock";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -29,6 +31,10 @@ export const MainLayout: FunctionComponent<
     activePerson
   );
 
+  const {enableLogs} = useLogs()
+
+  console.log("useLogs",enableLogs);
+
   return (
     <main
       className={classNames(
@@ -40,9 +46,9 @@ export const MainLayout: FunctionComponent<
       <div className={classNames("flex gap-2 mb-4")}>
         {Object.values(Person).map((person) => (
           <Button
-            key={person}
-            active={activePerson === person}
-            onClick={() => handleUserChange(person) }
+          key={person}
+          active={activePerson === person}
+          onClick={() => handleUserChange(person) }
           >
             {person}
           </Button>
@@ -50,6 +56,7 @@ export const MainLayout: FunctionComponent<
         <button />
       </div>
       <UserCard user={personData} isLoading={loading} error={error && activePerson} />
+      <Clock />
     </main>
   );
 };

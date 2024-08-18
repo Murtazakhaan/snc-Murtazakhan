@@ -49,7 +49,7 @@ export const MainLayout: FunctionComponent<
       className={classNames(
         inter.className,
         "h-screen w-screen",
-        "flex flex-col justify-center items-center"
+        "flex flex-col justify-center items-center px-3"
       )}
     >
       <div className="flex mb-4">
@@ -65,7 +65,7 @@ export const MainLayout: FunctionComponent<
           ))}
           <button />
         </div>
-        <div className="border-l border-black dark:border-white mx-2 pl-2"></div>
+        <div className="sm:border-l border-l-0 border-black dark:border-white sm:mx-2 sm:pl-2"></div>
         <div>
           <Button active={enableLogs} onClick={handleToggleLogs}>
             {enableLogs ? "Disable Logs" : "Enable Logs"}
